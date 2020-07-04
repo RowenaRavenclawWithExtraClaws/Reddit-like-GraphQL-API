@@ -15,6 +15,7 @@
   "author": "Abdelrahman Nasser",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^2.1.3",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^15.2.0"

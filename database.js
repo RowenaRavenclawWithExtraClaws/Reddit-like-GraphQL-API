@@ -1,20 +1,16 @@
 'use strict'
 
 const { PrismaClient } = require('@prisma/client');
+const generator = require('./idGenerator');
 
 const prisma = new PrismaClient();
-
-function generateRandomUserID() {
-    return '';
-}
 
 let createUser = async (userData) => {
     await prisma.user.create({
         data: {
-            id: generateRandomUserID(),
+            id: generator.generateRandomUserID(),
             username: userData.username,
             displayname: userData.displayname,
-            username: userData.username,
             email: userData.email,
             userpassword: userData.userpassword,
             datecreated: Date.now().toString(),
@@ -25,3 +21,5 @@ let createUser = async (userData) => {
 
     console.log('user has ben created');
 }
+
+exports.createUser = createUser;

@@ -31,7 +31,7 @@ type Query {
     #users: [User]
     #communities: [Community]
     #posts: [Post]
-    user(userName: String): User 
+    users: [User]! 
 }
 
 input UserInfo {
@@ -39,9 +39,8 @@ input UserInfo {
     displayname: String!
     email: String!
     userpassword: String!
-    datecreated: String!
     age: Int
-    about: String
+    about: String   
 }
 
 type Mutation {

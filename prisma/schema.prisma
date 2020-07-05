@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource sqlite {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  about        String?
+  age          Int?
+  datecreated  String
+  displayname  String
+  email        String
+  id           String      @unique
+  username     String      @unique
+  userpassword String
+  communities    community[]
+  posts         post[]
+  members       member[]
+
+  @@id([id, username])
+}
+
+model community {
+  about         String?
+  communityname String
+  creatorid     String
+  datecreated   String
+  displayname   String
+  id            String   @id
+  topic         String
+  user          user     @relation(fields: [creatorid], references: [id])
+  posts          post[]
+  members        member[]
+}
+
+model post {
+  communityid  String
+  content      String
+  creatorid    String
+  datecreated  String
+  downvotes    Int
+  id           String    @id
+  parentpostid String?
+  upvotes      Int
+  community    community @relation(fields: [communityid], references: [id])
+  user         user      @relation(fields: [creatorid], references: [id])
+  post         post?     @relation("postTopost_parentpostid", fields: [parentpostid], references: [id])
+  other_posts   post[]    @relation("postTopost_parentpostid")
+}
+
+model member {
+  communityid String
+  id          String    @id
+  userid      String
+  community   community @relation(fields: [communityid], references: [id])
+  user        user      @relation(fields: [userid], references: [id])
+}

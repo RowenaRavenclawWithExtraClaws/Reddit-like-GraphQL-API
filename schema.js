@@ -1,0 +1,61 @@
+'use strict'
+
+const { buildSchema } = require('graphql');
+
+const schema = buildSchema(`
+type User {
+    username: String!
+    displayname: String!
+    email: String!
+    userpassword: String!
+    datecreated: String!
+    age: Int
+    about: String
+}
+
+type Community {
+    creator: User!
+    communityname: String!
+    displayname: String!
+    datecreated: String!
+    topic: String!
+    about: String
+}
+
+type Post {
+    creator: User!
+    community: Community!
+    parentpost: Post!
+    datecreated: String!
+    contents: String!
+    upvotes: Int!
+    downvotes: Int!
+}
+
+type Query {
+    #users: [User]
+    #communities: [Community]
+    #posts: [Post]
+    users: [User]! 
+}
+
+input UserInfo {
+    username: String!
+    displayname: String!
+    email: String!
+    userpassword: String!
+    age: Int
+    about: String
+}
+
+type Mutation {
+    createUser(info: UserInfo): User!
+}
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+`);
+
+exports.schema = schema;

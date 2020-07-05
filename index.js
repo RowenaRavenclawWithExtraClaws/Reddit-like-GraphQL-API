@@ -5,11 +5,11 @@ const graphqlHTTP = require('express-graphql');
 
 const app = express();
 const { schema } = require('./schema');
-const { root } = require('./root');
+const { resolver } = require('./resolve');
 
 app.use('/reddit', graphqlHTTP({
     schema: schema,
-    rootValue: root,
+    rootValue: resolver,
     graphiql: true,
 }));
 

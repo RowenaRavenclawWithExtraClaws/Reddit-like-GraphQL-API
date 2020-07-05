@@ -22,4 +22,11 @@ let createUser = async (userData) => {
     console.log('user has ben created');
 }
 
+let fetchUsers = async () => {
+    let users = await prisma.user.findMany();
+
+    return users;
+}
+
 exports.createUser = createUser;
+exports.fetchUsers = fetchUsers;

@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 let createUser = async (userData) => {
     await prisma.user.create({
         data: {
-            id: generator.generateRandomUserID(),
+            id: generator.generateRandomID(9),
             username: userData.username,
             displayname: userData.displayname,
             email: userData.email,

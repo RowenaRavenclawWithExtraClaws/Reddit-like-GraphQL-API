@@ -1,6 +1,6 @@
 'use strict'
 
-let generateRandomUserID = () => {
+let generateRandomID = (idLen) => {
     let generatedID = '';
     let coinFlip = 0;
     let counter = 0;
@@ -8,7 +8,7 @@ let generateRandomUserID = () => {
     let nums = '0123456789';
     let chars = 'abcdefghijklmnopqrstuvwxyz';
 
-    while (counter < 9) {
+    while (counter < idLen) {
         coinFlip = Math.floor(Math.random() * 2);
 
         if (coinFlip == 0) {
@@ -26,12 +26,4 @@ let generateRandomUserID = () => {
     return generatedID;
 }
 
-let generateRandomCommunityID = () => {
-
-}
-
-let generateRandomPostID = () => {
-
-}
-
-exports.generateRandomUserID = generateRandomUserID;
+exports.generateRandomID = generateRandomID;
